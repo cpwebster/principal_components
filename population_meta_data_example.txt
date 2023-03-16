@@ -1,0 +1,6 @@
+ID	Pop	SP
+sample_1	1	species_1
+sample_2	2	species_1
+sample_3	2	species_2
+sample_4	1	species_1
+sample_5	2	species_1
