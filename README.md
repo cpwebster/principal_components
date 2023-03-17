@@ -9,6 +9,6 @@ This text file contains a series of commands that call VCFtools and Plink 1.9 be
 
 This text file is an example of a metadata file that is needed for plot_pca.R to be executed. This is a tab-delimited text file with a header, sample name in the first column, cooresponding population in the second column, and cooresponding species (name or abbreviation) in third column.
 
-#plot_PCA.R
+#plot_PCA.R:
 
 This R script reads in output files from principal component analyses and metadata documents to produce principal component plots. It's suggested to run this script line by line to tailor for given needs.
