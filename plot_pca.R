@@ -58,9 +58,9 @@ cumsum(pve$pve)
 
 
 
-# -----------
-# 2D PCA plot
-# -----------
+# --------
+# PCA plot
+# --------
 
 # The following code creates a PCA plot with points that are colored by
 # population (group) and shaped by species. Omit geompoint() line if
