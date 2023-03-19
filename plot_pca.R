@@ -25,8 +25,6 @@ names(pca)[2:ncol(pca)] <- paste0("PC", 1:(ncol(pca)-1))
 Group <- rep(NA, length(pop.data))
 Group[grep("1", pop.data$Pop)] <- "1"
 Group[grep("2", pop.data$Pop)] <- "2"
-Group[grep("3", pop.data$Pop)] <- "3"
-Group[grep("4", pop.data$Pop)] <- "4"
 
 #group by species
 #alter for number of species
@@ -78,7 +76,7 @@ pca_plot <-
   geom_hline(yintercept = 0) +
   geom_vline(xintercept = 0) +
   theme_bw() +
-  ggtitle("<plot_title_here") + 
+  ggtitle("<plot_title_here>") + 
   theme(plot.title = element_text(hjust = 0.5)) +
   xlab(paste0("PC1 (", signif(pve$pve[1], 3), "%)")) + 
   ylab(paste0("PC2 (", signif(pve$pve[2], 3), "%)"))
