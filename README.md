@@ -1,6 +1,10 @@
 # principal_components
 The following scripts and file utilize VCFtools (Danecek et al., 2011) and Plink 1.9 beta to calculate principal components for a given VCF, provide an example of the metadata file needed to plot the principal components, and the R script that visualizes the principal components and metadata.
 
+Intended workflow: (run all in the same directory)
+1) run_plink_pca.bash
+2) plot_pca.R
+
 #run_plink_pca.bash
 
 This script will call VCFtools and Plink 1.9 beta to create a VCF file with no indels, performs linkage pruning, and creates .eigenvec and .eigenval files that will be used to visualize the principal components. This script cannot be run on a compressed VCF.
