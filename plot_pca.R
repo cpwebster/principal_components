@@ -6,33 +6,37 @@ library(tidyverse)
 # Data prep and parsing
 # ---------------------
 
-#read in files with principal components
-pca <- read_table("<plink_prunned_output_file.eigenvec>", col_names = FALSE)
-eigenval <- scan("<plink_prunned_output_file.eigenval>")
+# read in files with principal components
+pca <- read_table("<plink_prunned_output_file>.eigenvec", col_names = FALSE)
+eigenval <- scan("<plink_prunned_output_file>.eigenval")
 
-#read in population data
-pop.data <- read.table("<your_population_metadata.txt>", sep = "\t", header = TRUE)
+# read in population data
+pop.data <- read.table("<your_population_metadata>.txt", sep = "\t", header = TRUE)
 
-#remove nuisance column
+# remove nuisance column
 pca <- pca[,-1]
 
-#set column names to pca file
+# set column names to pca file
 names(pca)[1] <- "ind"
 names(pca)[2:ncol(pca)] <- paste0("PC", 1:(ncol(pca)-1))
 
-#group by population
-#alter for number of populations
+# group by population
+# alter if number of populations is not 5
 Group <- rep(NA, length(pop.data))
 Group[grep("1", pop.data$Pop)] <- "1"
 Group[grep("2", pop.data$Pop)] <- "2"
+Group[grep("3", pop.data$Pop)] <- "3"
+Group[grep("4", pop.data$Pop)] <- "4"
+Group[grep("5", pop.data$Pop)] <- "5"
 
-#group by species
-#alter for number of species
+# group by species
+# alter for number of species, how species are labeled in your metadata, and how 
+# you would like species to appear labeled on plot.
 Species <- rep(NA, length(pop.data))
 Species[grep("species_1", pop.data$SP)] <- "Species 1"
 Species[grep("species_2", pop.data$SP)] <- "Species 2"
 
-#make new data frame (with sample names, group, and species)
+# make new data frame (with sample names, group, and species)
 pca_1 <- tibble(pca, Group, Species)
 
 
@@ -41,29 +45,29 @@ pca_1 <- tibble(pca, Group, Species)
 # Percent variance explained
 # --------------------------
 
-#convert to percentage variance explained
+# convert to percentage variance explained
 pve <- data.frame(PC = 1:20, pve = eigenval/sum(eigenval)*100)
 
-#make plot % variance explained
+# make plot % variance explained
 perc_var <-
   ggplot(pve, aes(PC, pve)) + geom_bar(stat = "identity") +
   ylab("Percentage variance explained") +
   theme_light()
 perc_var
 
-#calculate the cumulative sum of the percentage variance explained
+# calculate the cumulative sum of the percentage variance explained
 cumsum(pve$pve)
 
 
 
-# --------
-# PCA plot
-# --------
+# -----------
+# 2D PCA plot
+# -----------
 
 # The following code creates a PCA plot with points that are colored by
 # population (group) and shaped by species. Omit geompoint() line if
-# you only want to color by population. You will need to add colors to
-# scale_colour_manual() line if looking at >2 populations.
+# you only want to color by population. You will need to alter the number 
+# of colors on scale_colour_manual() line if you are not looking at 5 populations.
 
 # This default is comparing PC1 with PC2, if needing to compare other
 # PCs (see percent variation), change values on ggplot() and
@@ -72,7 +76,9 @@ cumsum(pve$pve)
 pca_plot <-
   ggplot(pca_1, aes(x=PC1, y=PC2, col = Group)) +
   geom_point(aes(shape = Species), size=3.5, alpha=0.6) +
-  scale_colour_manual(values = c("deeppink1","darkorchid")) +
+  scale_colour_manual(values = c("deeppink1","darkorchid1", 
+                                 "darkorange1","deepskyblue1", 
+                                 "seagreen3")) +
   geom_hline(yintercept = 0) +
   geom_vline(xintercept = 0) +
   theme_bw() +
@@ -82,7 +88,7 @@ pca_plot <-
   ylab(paste0("PC2 (", signif(pve$pve[2], 3), "%)"))
 pca_plot
 
-#save plot
+# save plot
 ggsave(
   "PC1_PC2.png",
   device = NULL,
@@ -91,7 +97,6 @@ ggsave(
   height = 5,
   units = c("in"),
   dpi = 300)
-
 
 
 
