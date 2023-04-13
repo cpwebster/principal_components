@@ -42,7 +42,10 @@ module load plink/1.9.0
 # Creating new VCF with no indels
 # ----------------------------------
 
-vcftools --vcf ${input_vcf_file} --remove-indels --recode --out vcf_no_indels
+vcftools --vcf ${input_vcf_file} \
+--remove-indels \
+--recode \
+--out vcf_no_indels
 
 echo "[ *** New VCF with no indels created *** ]"
 
@@ -54,7 +57,12 @@ echo "[ *** New VCF with no indels created *** ]"
 #threads argument: more efficient processing
 #indep-pairwise argument: <window size> <step size> <r^2 threshold>
 
-plink --vcf vcf_no_indels.recode.vcf --allow-extra-chr 0 --double-id --threads 8 --indep-pairwise 50 10 0.1 --out to_be_prunned
+plink --vcf vcf_no_indels.recode.vcf \
+--allow-extra-chr 0 \
+--double-id \
+--threads 8 \
+--indep-pairwise 50 10 0.1 \
+--out to_be_prunned
 
 echo "[ *** Identified sites to be prunned *** ]"
 
@@ -64,7 +72,14 @@ echo "[ *** Identified sites to be prunned *** ]"
 
 #calculate PCA with pruned linkage data
 
-plink --vcf vcf_no_indels.recode.vcf --double-id --allow-extra-chr --extract to_be_prunned.prune.in --make-bed --threads 8 --pca --out ${output_prefix}
+plink --vcf vcf_no_indels.recode.vcf \
+--double-id \
+--allow-extra-chr \
+--extract to_be_prunned.prune.in \
+--make-bed \
+--threads 8 \
+--pca \
+--out ${output_prefix}
 
 echo "[ *** Calculated principal components with prunned linkage data! *** ]"
 
