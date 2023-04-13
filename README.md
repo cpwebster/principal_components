@@ -1,9 +1,11 @@
 # principal_components
-Included are a text document of commands that call VCFtools (Danecek et al., 2011) and Plink 1.9 beta to calculate principal components for a given VCF, an example of the metadata file needed, and the R script that uses the principal component results and metadata to create a plot.
+The following scripts and file utilize VCFtools (Danecek et al., 2011) and Plink 1.9 beta to calculate principal components for a given VCF, provide an example of the metadata file needed to plot the principal components, and the R script that visualizes the principal components and metadata.
 
-#plink_pca_commands.txt:
+#run_plink_pca.bash
 
-This text file contains a series of commands that call VCFtools and Plink 1.9 beta to remove indels, perform linkage prunning, and calculate principal components for a given VCF.
+This script will call VCFtools and Plink 1.9 beta to create a VCF file with no indels, performs linkage pruning, and creates .eigenvec and .eigenval files that will be used to visualize the principal components. This script cannot be run on a compressed VCF.
+
+USAGE: bash run_plink_pca.bash -v <input_vcf_file> -o <output_file_prefix>
 
 #population_meta_data_example.txt:
 
@@ -11,4 +13,4 @@ This text file is an example of a metadata file that is needed for plot_pca.R to
 
 #plot_PCA.R:
 
-This R script reads in output files from principal component analyses and metadata documents to produce principal component plots. It's suggested to run this script line by line to tailor for given needs.
+This R script reads in output files from principal component analyses (.eigenvec and .eigenval) and the metadata text file to produce principal component plots. The default is written for PCs with 5 populations and 2 species; you will need to run this script line by line to tailor for individual needs.
