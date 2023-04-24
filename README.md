@@ -1,5 +1,5 @@
 # principal_components
-The following scripts and file utilize VCFtools (Danecek et al., 2011) and Plink 1.9 beta to calculate principal components for a given VCF, provide an example of the metadata file needed to plot the principal components, and the R script that visualizes the principal components and metadata.
+The following scripts utilize VCFtools (Danecek et al., 2011) and Plink 1.9 beta to calculate and plot principal components for a given VCF. Additionally, an example of the metadata file needed to plot the principal components is included.
 
 Intended workflow: (run in the same directory)
 1) run_plink_pca.bash
