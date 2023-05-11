@@ -45,6 +45,7 @@ module load plink/1.9.0
 vcftools --vcf ${input_vcf_file} \
 --remove-indels \
 --recode \
+--recode-INFO-all \
 --out vcf_no_indels
 
 echo "[ *** New VCF with no indels created *** ]"
