@@ -13,7 +13,7 @@ eigenval <- scan("<plink_prunned_output_file>.eigenval")
 # read in population data
 pop.data <- read.table("<your_population_metadata>.txt", sep = "\t", header = TRUE)
 
-# remove nuisance column
+# remove nuance column
 pca <- pca[,-1]
 
 # set column names to pca file
